@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
+<rect width="1000" height="300" fill="#fafafa"/>
+<text x="500" y="30" text-anchor="middle" font-size="20" font-weight="bold">Membership Registration Workflow</text>
+<g font-size="11">
+<!-- 7 steps -->
+<rect x="10" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="70" y="140" text-anchor="middle">Online Registration</text>
+<rect x="150" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="210" y="140" text-anchor="middle">Payment Request</text>
+<rect x="290" y="110" width="120" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="350" y="140" text-anchor="middle">bKash MFS Payment</text>
+<rect x="430" y="110" width="120" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="490" y="133" text-anchor="middle">Webhook</text><text x="490" y="148" text-anchor="middle">Verification</text>
+<rect x="570" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="630" y="140" text-anchor="middle">Transaction Update</text>
+<rect x="710" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="770" y="133" text-anchor="middle">Admin Approval</text><text x="770" y="148" text-anchor="middle">Workflow</text>
+<rect x="850" y="110" width="130" height="55" rx="6" fill="#2b6cb0"/><text x="915" y="133" text-anchor="middle" fill="white">Membership</text><text x="915" y="148" text-anchor="middle" fill="white">Activation</text>
+
+<line x1="130" y1="137" x2="150" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="270" y1="137" x2="290" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="410" y1="137" x2="430" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="550" y1="137" x2="570" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="690" y1="137" x2="710" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="830" y1="137" x2="850" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+</g>
+<text x="500" y="220" text-anchor="middle" font-size="12" fill="#333">Failure paths: expired payment -&gt; cancel application &amp; notify user; duplicate webhook -&gt; rejected via idempotency key.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<rect width="1100" height="620" fill="#fafafa"/>
+<text x="550" y="30" text-anchor="middle" font-size="20" font-weight="bold">Deployment Architecture — Dev / Test / Production</text>
+
+<!-- Dev -->
+<rect x="30" y="70" width="320" height="500" rx="10" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="190" y="100" text-anchor="middle" font-size="15" font-weight="bold">Development</text>
+<rect x="60" y="130" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="190" y="160" text-anchor="middle" font-size="11">Docker Compose (local)</text>
+<rect x="60" y="200" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="190" y="230" text-anchor="middle" font-size="11">TheOne.API + Next.js (hot reload)</text>
+<rect x="60" y="270" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="190" y="300" text-anchor="middle" font-size="11">PostgreSQL + Redis (containers)</text>
+<rect x="60" y="340" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="190" y="370" text-anchor="middle" font-size="11">MinIO (local object storage)</text>
+<text x="190" y="430" text-anchor="middle" font-size="11" fill="#333">Seed data auto-applied</text>
+<text x="190" y="450" text-anchor="middle" font-size="11" fill="#333">No CDN / no real bKash</text>
+<text x="190" y="470" text-anchor="middle" font-size="11" fill="#333">(sandbox credentials)</text>
+
+<!-- Test/Staging -->
+<rect x="390" y="70" width="320" height="500" rx="10" fill="#ebf8ff" stroke="#2b6cb0" stroke-width="2"/>
+<text x="550" y="100" text-anchor="middle" font-size="15" font-weight="bold">Test / Staging</text>
+<rect x="420" y="130" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="550" y="160" text-anchor="middle" font-size="11">Docker containers (cloud VM)</text>
+<rect x="420" y="200" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="550" y="230" text-anchor="middle" font-size="11">CI/CD auto-deploy on merge to main</text>
+<rect x="420" y="270" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="550" y="300" text-anchor="middle" font-size="11">Managed PostgreSQL + Redis</text>
+<rect x="420" y="340" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="550" y="370" text-anchor="middle" font-size="11">bKash sandbox webhook</text>
+<text x="550" y="430" text-anchor="middle" font-size="11" fill="#333">Playwright E2E run here</text>
+<text x="550" y="450" text-anchor="middle" font-size="11" fill="#333">Manual QA sign-off before</text>
+<text x="550" y="470" text-anchor="middle" font-size="11" fill="#333">promotion to Production</text>
+
+<!-- Production -->
+<rect x="750" y="70" width="320" height="500" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="910" y="100" text-anchor="middle" font-size="15" font-weight="bold">Production</text>
+<rect x="780" y="130" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="910" y="160" text-anchor="middle" font-size="11">Load Balancer + CDN (edge)</text>
+<rect x="780" y="200" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="910" y="230" text-anchor="middle" font-size="11">Docker / K8s cluster (multi-instance API)</text>
+<rect x="780" y="270" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="910" y="300" text-anchor="middle" font-size="11">Managed PostgreSQL (HA + backups)</text>
+<rect x="780" y="340" width="260" height="50" rx="6" fill="white" stroke="#4a5568"/><text x="910" y="370" text-anchor="middle" font-size="11">Redis + Object Storage (replicated)</text>
+<text x="910" y="430" text-anchor="middle" font-size="11" fill="#333">Blue-green deploy, health checks,</text>
+<text x="910" y="450" text-anchor="middle" font-size="11" fill="#333">automated rollback, live bKash</text>
+<text x="910" y="470" text-anchor="middle" font-size="11" fill="#333">Manual approval gate before release</text>
+
+<line x1="350" y1="320" x2="390" y2="320" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+<line x1="710" y1="320" x2="750" y2="320" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
+</svg>

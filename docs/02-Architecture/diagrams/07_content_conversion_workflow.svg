@@ -1,0 +1,25 @@
+<svg viewBox="0 0 1050 320" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
+<rect width="1050" height="320" fill="#fafafa"/>
+<text x="525" y="30" text-anchor="middle" font-size="20" font-weight="bold">Content Conversion Workflow</text>
+<g font-size="10.5">
+<rect x="10" y="110" width="115" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="67" y="140" text-anchor="middle">Upload</text><text x="67" y="153" text-anchor="middle">(PDF/DOC/Scan)</text>
+<rect x="140" y="110" width="115" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="197" y="140" text-anchor="middle">Text Extraction</text>
+<rect x="270" y="110" width="115" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="327" y="140" text-anchor="middle">Encoding Detection</text>
+<rect x="400" y="110" width="115" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="457" y="133" text-anchor="middle">Bijoy to</text><text x="457" y="148" text-anchor="middle">Unicode Conv.</text>
+<rect x="530" y="110" width="115" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="587" y="133" text-anchor="middle">Automatic</text><text x="587" y="148" text-anchor="middle">Quality Check</text>
+<rect x="660" y="110" width="130" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="725" y="133" text-anchor="middle">Human Review</text><text x="725" y="148" text-anchor="middle">(Diff Viewer)</text>
+<rect x="805" y="110" width="115" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="862" y="140" text-anchor="middle">Admin Approval</text>
+<rect x="935" y="110" width="105" height="55" rx="6" fill="#2b6cb0"/><text x="987" y="133" text-anchor="middle" fill="white">Library</text><text x="987" y="148" text-anchor="middle" fill="white">Publication</text>
+
+<line x1="125" y1="137" x2="140" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="255" y1="137" x2="270" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="385" y1="137" x2="400" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="515" y1="137" x2="530" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="645" y1="137" x2="660" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="790" y1="137" x2="805" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<line x1="920" y1="137" x2="935" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+</g>
+<text x="525" y="230" text-anchor="middle" font-size="12" fill="#333">QC checks: word count, paragraph comparison, character loss, encoding validation, missing content.</text>
+<text x="525" y="250" text-anchor="middle" font-size="12" fill="#333">Reject at any stage returns content to the previous step with reviewer notes; up to 5 approved versions retained.</text>
+</svg>
