@@ -1,29 +1,35 @@
-1. Document Control
+# The One Project - Software Architecture Document
 
-2. Architecture Goals
+## Architecture
 
-3. System Context Diagram
+The system follows Clean Architecture.
 
-4. High-Level Architecture
+Solution:
 
-5. Clean Architecture Layers
+- TheOne.API
+- TheOne.Application
+- TheOne.Domain
+- TheOne.Infrastructure
+- TheOne.Persistence
+- TheOne.Identity
+- TheOne.McpServer
+- TheOne.Worker
 
-6. Solution Structure
+## Authentication
 
-7. Module Architecture
+ASP.NET Core Identity
+JWT
+Refresh Token
+MFA
 
-8. Authentication Architecture
+## Authorization
 
-9. Authorization Architecture
-
-10. Database Architecture
-
-11. Content Pipeline
-
-12. MCP Architecture
-
-13. Deployment Architecture
-
-14. Security Architecture
-
-15. Development Standards
+User
+|
+Role
+|
+Role Permission
+|
+User Specific Permission Override
+|
+Data Permission

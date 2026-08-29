@@ -1,17 +1,7 @@
-# ADR-001: Clean Architecture Decision
+# ADR-001 Clean Architecture
 
-## Status
+Decision:
+Use Clean Architecture.
 
-Accepted
-
-## Decision
-
-The One Project will follow Clean Architecture.
-
-## Reason
-
-- Separation of concerns
-- Maintainability
-- Testability
-- Long-term scalability
-- Independent business logic
+Reason:
+Maintainability, testability, scalability.
