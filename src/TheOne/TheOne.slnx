@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="../TheOne.Application/TheOne.Application.csproj" Id="e35e8e3c-7954-4e6a-97f2-19d21da77bb7" />
+    <Project Path="../TheOne.Domain/TheOne.Domain.csproj" Id="a561e05c-0dfc-4ee5-832d-3b4cbe34e2cd" />
+    <Project Path="../TheOne.Infrastructure/TheOne.Infrastructure.csproj" Id="9afb389c-27b1-4fbe-bf34-4d6b198416a6" />
+    <Project Path="../TheOne.Persistence/TheOne.Persistence.csproj" Id="6ac79c1c-c550-443f-ad3b-570944495bea" />
+    <Project Path="TheOne.API.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="../TheOne.IntegrationTests/TheOne.IntegrationTests.csproj" Id="d1ee7c98-dc23-4aad-a0a4-41d6119fa10e" />
+    <Project Path="../TheOne.UnitTests/TheOne.UnitTests.csproj" Id="ce996a60-93fb-4a8c-ae7e-2edf518108ab" />
+  </Folder>
+</Solution>
