@@ -109,3 +109,7 @@ Migration: `20260910100612_AddAdministrationAndAudit`. It adds navigation and au
 Automated checks cover the existing authentication/User Management flows plus delegated permissions, permission revocation, MFA enforcement, protected/assigned roles, concurrent duplicate creation, menu hierarchy/visibility, unsafe inputs, audit filtering, credential exclusion and database immutability. Tests use an isolated PostgreSQL database without real SMS.
 
 Suggested review order: User Management list/details; custom role creation; role/menu assignment to an enrolled test account; permission removal and navigation refresh; then the matching audit entries. Use a separate test account for status changes.
+
+## Operator bootstrap and recovery
+
+See [Operator runbook](operator-recovery.md). The operator commands are not HTTP endpoints and do not require an existing application session. Their authority comes from restricted host/database access and externally verified approvals.

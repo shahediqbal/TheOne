@@ -19,7 +19,7 @@ public sealed class IdentityUserSessionStore(TheOneDbContext db, UserManager<App
         var user = await RequireUserAsync(userId, cancellationToken);
         var roles = await users.GetRolesAsync(user);
         return new CurrentUserResponse(user.Id, user.FullName, user.Email, user.PhoneNumber,
-            user.EmailConfirmed, user.PhoneNumberConfirmed, user.CreatedAtUtc, roles.OrderBy(x => x).ToArray());
+            user.EmailConfirmed, user.PhoneNumberConfirmed, user.CreatedAtUtc, roles.OrderBy(x => x).ToArray(), user.TwoFactorEnabled);
     }
 
     /// <inheritdoc />

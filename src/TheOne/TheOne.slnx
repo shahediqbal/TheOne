@@ -5,6 +5,7 @@
     <Project Path="../TheOne.Infrastructure/TheOne.Infrastructure.csproj" Id="9afb389c-27b1-4fbe-bf34-4d6b198416a6" />
     <Project Path="../TheOne.Persistence/TheOne.Persistence.csproj" Id="6ac79c1c-c550-443f-ad3b-570944495bea" />
     <Project Path="TheOne.API.csproj" />
+    <Project Path="../TheOne.Operations/TheOne.Operations.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="../TheOne.IntegrationTests/TheOne.IntegrationTests.csproj" Id="d1ee7c98-dc23-4aad-a0a4-41d6119fa10e" />

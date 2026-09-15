@@ -1,0 +1,70 @@
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  min-width: 320px;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  background: #d6aa52;
+  color: #113e48;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 800;
+}
+.auth-art {
+  background: #123e48;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.auth-art:after {
+  content: "";
+  position: absolute;
+  inset: 55% -20% -35% 20%;
+  border: 1px solid #ffffff20;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px #ffffff06,
+    0 0 0 140px #ffffff04;
+}
+.codes {
+  font-family: monospace;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #f4f7f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.MuiDialogContent-root {
+  padding-top: 12px !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

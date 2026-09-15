@@ -67,6 +67,7 @@ public sealed class IdentityMfaStore(TheOneDbContext db, UserManager<Application
             var codes = await NewRecoveryCodesAsync(user);
             challenge.ConsumedAtUtc = DateTime.UtcNow;
             await AuthenticationSecurity.RevokeAsync(db, user.Id, "Authenticator enrolled.", ct);
+            TheOne.Persistence.Administration.AdministrationStore.Audit(db, user.Id, "Authentication.AuthenticatorEnrolled", user.Id.ToString(), new { });
             logger.LogInformation("Authenticator enrolled for {UserId}", user.Id);
             return codes;
         }, ct);

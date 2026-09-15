@@ -1,5 +1,13 @@
 # Frontend Architecture Document
 
+## September 2026 application split
+
+The management application now lives in `apps/management` and uses **Vite + React + TypeScript + MUI** as a client-rendered SPA. It covers administrative and account-security workflows and will later host membership and authorized research workflows. Its startup and browser-authentication instructions are in `apps/management/README.md`.
+
+The public reading archive and organization website are planned as separate **Next.js + TypeScript + Tailwind** applications with static generation/revalidation where appropriate. The reader mobile app remains **Flutter**. They share the .NET API's business capabilities; the management UI does not duplicate backend authorization rules.
+
+The Next.js architecture below applies to the planned public web applications. Its previous combined member/admin route proposal is superseded by this application split. Public reader account features, if introduced, require their own authenticated design.
+
 Covers the Next.js web app. Flutter mobile is covered separately in the mobile app plan.
 
 ## Stack

@@ -27,6 +27,7 @@ public sealed class UserSessionTests
         Assert.Equal(account.Email, profile.Email);
         Assert.Equal("Session Test", profile.FullName);
         Assert.Contains("Member", profile.Roles);
+        Assert.False(profile.AuthenticatorEnabled);
         var json = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("passwordHash", json);
         Assert.DoesNotContain("securityStamp", json);

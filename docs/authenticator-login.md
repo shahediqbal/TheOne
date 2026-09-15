@@ -57,3 +57,7 @@ Migration `20260909051151_AddAuthenticatorLoginPolicy` adds MFA challenges, acce
 The integration suite covers enrollment, encrypted/hashed storage, TOTP and recovery-code replay, concurrent completion, lockout, challenge expiry/purpose, protected reset, recovery-code regeneration, role promotion, and optional SMS login. It uses an isolated PostgreSQL database and a fake SMS sender.
 
 Administrative permissions also require an MFA-authenticated session for custom roles. See [Administration review](administration-review.md).
+
+## Supported operator procedures
+
+First-SuperAdmin bootstrap and full Admin/SuperAdmin recovery now have an operator-only CLI. See [Operator bootstrap and recovery](operator-recovery.md) for approval, identity verification, configuration, and mandatory re-enrollment. This supersedes the earlier absence of a supported operator procedure; public recovery restrictions remain in force.

@@ -9,7 +9,8 @@ public sealed class SecurityRequestAuditMiddleware(RequestDelegate next, ILogger
     {
         await next(context);
         var path = context.Request.Path.Value ?? "";
-        var authentication = path.StartsWith("/api/v1/auth/", StringComparison.Ordinal) && context.Request.Method == "POST";
+        var authentication = (path.StartsWith("/api/v1/auth/", StringComparison.Ordinal) ||
+            path.StartsWith("/api/v1/browser/auth/", StringComparison.Ordinal)) && context.Request.Method == "POST";
         var denied = path.StartsWith("/api/v1/admin/", StringComparison.Ordinal) && context.Response.StatusCode is 401 or 403;
         if (!authentication && !denied) return;
         try

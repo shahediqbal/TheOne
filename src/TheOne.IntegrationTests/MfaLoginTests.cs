@@ -331,7 +331,7 @@ public sealed class MfaLoginTests
         Assert.True((await users.AddToRoleAsync(user!, role)).Succeeded);
     }
 
-    private static string Totp(string key, int offset = 0)
+    internal static string Totp(string key, int offset = 0)
     {
         const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
         var bytes = new List<byte>(); var buffer = 0; var bits = 0;
