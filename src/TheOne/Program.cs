@@ -1,3 +1,5 @@
+using TheOne.Application.Membership;
+using TheOne.Infrastructure.Translation;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
@@ -21,6 +23,9 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
             .SelectMany(x => x.Errors).Select(_ => "One or more request fields are invalid.")));
 });
 builder.Services.AddApplication();
+builder.Services.AddSingleton(new MembershipSubmissionPolicy(
+    builder.Configuration.GetSection("Membership:RequiredSubmissionFields").Get<string[]>()));
+builder.Services.AddTranslationInfrastructure(builder.Configuration);
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddOtpInfrastructure(builder.Configuration);
@@ -66,6 +71,10 @@ builder.Services.AddExceptionHandler<AuthenticationExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddRateLimiter(options =>
 {
+    options.AddPolicy("membership-public", context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            _ => new FixedWindowRateLimiterOptions { PermitLimit = 30, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
     options.AddPolicy("authentication", context =>
         RateLimitPartition.GetFixedWindowLimiter(
             context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
@@ -77,7 +86,7 @@ builder.Services.AddRateLimiter(options =>
     {
         context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
         await context.HttpContext.Response.WriteAsJsonAsync(
-            ApiResponse<object>.FailureResponse("Too many authentication requests. Try again later."),
+            ApiResponse<object>.FailureResponse("Too many requests. Try again later."),
             cancellationToken);
     };
 });

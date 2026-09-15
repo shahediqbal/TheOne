@@ -1,3 +1,4 @@
+using TheOne.Application.Membership;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using TheOne.Application.Authentication;
@@ -15,6 +16,14 @@ public sealed class AuthenticationExceptionHandler : IExceptionHandler
         ApiResponse<object> response;
         switch (exception)
         {
+            case MembershipApplicationNotFoundException or MemberNotFoundException:
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                response = ApiResponse<object>.FailureResponse(exception.Message);
+                break;
+            case MembershipApplicationNotEditableException or MembershipFeeNotPaidException or MembershipConflictException:
+                context.Response.StatusCode = StatusCodes.Status409Conflict;
+                response = ApiResponse<object>.FailureResponse(exception.Message);
+                break;
             case TheOne.Application.Administration.AdministrationException administration:
                 context.Response.StatusCode = administration.StatusCode;
                 response = ApiResponse<object>.FailureResponse(administration.Message);

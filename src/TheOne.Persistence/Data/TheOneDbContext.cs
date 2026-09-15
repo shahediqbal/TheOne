@@ -45,10 +45,28 @@ public sealed class TheOneDbContext
     public DbSet<SecurityAuditEvent> SecurityAuditEvents => Set<SecurityAuditEvent>();
 
     /// <inheritdoc />
+    public DbSet<MembershipApplication> MembershipApplications => Set<MembershipApplication>();
+    public DbSet<MembershipPhoto> MembershipPhotos => Set<MembershipPhoto>();
+    public DbSet<Member> Members => Set<Member>();
+    public DbSet<Contribution> Contributions => Set<Contribution>();
+
+    public DbSet<BlogPost> BlogPosts => Set<BlogPost>();
+    public DbSet<BlogPostTranslation> BlogTranslations => Set<BlogPostTranslation>();
+    public DbSet<BlogRevision> BlogRevisions => Set<BlogRevision>();
+    public DbSet<BlogSlug> BlogSlugs => Set<BlogSlug>();
+    public DbSet<WebsiteRecord> WebsiteRecords => Set<WebsiteRecord>();
+    public DbSet<WebsiteRevision> WebsiteRevisions => Set<WebsiteRevision>();
+    public DbSet<WebsiteSlug> WebsiteSlugs => Set<WebsiteSlug>();
+    public DbSet<WebsiteAsset> WebsiteAssets => Set<WebsiteAsset>();
+    public DbSet<BlogRevisionAuthor> BlogRevisionAuthors => Set<BlogRevisionAuthor>();
+    public DbSet<PublishingEvent> PublishingEvents => Set<PublishingEvent>();
+    public DbSet<BlogEmbedding> BlogEmbeddings => Set<BlogEmbedding>();
     protected override void OnModelCreating(
         ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.HasSequence<long>("MembershipReferenceNumbers");
+        builder.HasSequence<long>("MembershipNumbers");
 
         builder.ApplyConfigurationsFromAssembly(
             typeof(TheOneDbContext).Assembly);

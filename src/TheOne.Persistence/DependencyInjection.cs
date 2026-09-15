@@ -1,3 +1,5 @@
+using TheOne.Application.Membership;
+using TheOne.Persistence.Membership;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +47,16 @@ public static class DependencyInjection
         services.AddScoped<TheOne.Application.Administration.IAdministrationStore, TheOne.Persistence.Administration.AdministrationStore>();
         services.AddScoped<TheOne.Application.Administration.IPermissionReader, TheOne.Persistence.Administration.PermissionReader>();
         services.AddScoped<TheOne.Application.Administration.ISecurityRequestAudit, TheOne.Persistence.Administration.SecurityRequestAudit>();
+        services.AddScoped<IMembershipApplicationStore, MembershipApplicationStore>();
+        services.AddScoped<IMemberStore, MemberStore>();
+        services.AddScoped<IContributionStore, ContributionStore>();
+        services.AddScoped<IMembershipTransaction, MembershipTransaction>();
+        services.AddScoped<IMembershipManagement, MembershipManagement>();
+        services.AddScoped<IMembershipPhotos, MembershipPhotos>();
+        services.AddDataProtection();
+        services.AddScoped<TheOne.Application.Blog.IBlogService, TheOne.Persistence.Blog.BlogService>();
+        services.AddScoped<TheOne.Application.Website.IWebsiteService, TheOne.Persistence.Website.WebsiteService>();
+        services.AddScoped<TheOne.Application.Blog.IBlogSearch, TheOne.Persistence.Blog.BlogSearch>();
         return services;
     }
 }

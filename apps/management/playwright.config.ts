@@ -6,7 +6,7 @@ export default defineConfig({
     baseURL: "https://localhost:5173",
     ignoreHTTPSErrors: true,
     headless: true,
-    channel: "msedge",
+    channel: process.env.PLAYWRIGHT_CHANNEL || "msedge",
   },
   reporter: "list",
   webServer: {

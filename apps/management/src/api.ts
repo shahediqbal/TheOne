@@ -112,3 +112,36 @@ export async function logout() {
     window.dispatchEvent(new Event("session-ended"));
   }
 }
+
+export async function apiBlob(path: string): Promise<Blob> {
+  const sendBlob = () =>
+    fetch("/api/v1" + path, {
+      cache: "no-store",
+      credentials: "same-origin",
+      headers: accessToken ? { Authorization: "Bearer " + accessToken } : {},
+    });
+  let response = await sendBlob();
+  if (response.status === 401 && (await refresh())) response = await sendBlob();
+  if (!response.ok)
+    throw new ApiError("Photo could not be loaded.", response.status);
+  return response.blob();
+}
+export async function apiForm<T>(path: string, body: FormData): Promise<T> {
+  const sendForm = () =>
+    fetch("/api/v1" + path, {
+      method: "POST",
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: accessToken ? { Authorization: "Bearer " + accessToken } : {},
+      body,
+    });
+  let response = await sendForm();
+  if (response.status === 401 && (await refresh())) response = await sendForm();
+  const payload = await response.json();
+  if (!response.ok || !payload.success)
+    throw new ApiError(
+      [payload.message, ...(payload.errors || [])].filter(Boolean).join(" "),
+      response.status,
+    );
+  return payload.data;
+}

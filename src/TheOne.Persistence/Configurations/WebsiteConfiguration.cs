@@ -1,0 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TheOne.Domain.Entities;
+using TheOne.Persistence.Identity;
+namespace TheOne.Persistence.Configurations;
+public sealed class WebsiteConfiguration:IEntityTypeConfiguration<WebsiteRecord>,IEntityTypeConfiguration<WebsiteRevision>,IEntityTypeConfiguration<WebsiteSlug>,IEntityTypeConfiguration<WebsiteAsset>,IEntityTypeConfiguration<PublishingEvent>,IEntityTypeConfiguration<BlogRevisionAuthor>,IEntityTypeConfiguration<BlogEmbedding>
+{
+ public void Configure(EntityTypeBuilder<WebsiteRecord>b){b.ToTable("WebsiteRecords");b.HasKey(x=>x.Id);b.Property(x=>x.Title).HasMaxLength(200);b.Property(x=>x.Kind).HasMaxLength(30);b.Property(x=>x.Language).HasMaxLength(2);b.Property(x=>x.DraftJson).HasColumnType("jsonb");b.Property(x=>x.Version).IsConcurrencyToken();b.HasIndex(x=>new{x.CanonicalId,x.Language}).IsUnique();b.HasIndex(x=>new{x.Kind,x.Language}).IsUnique().HasFilter("\"Kind\" = 'SiteSettings'");b.HasOne<ApplicationUser>().WithMany().HasForeignKey(x=>x.LinkedStaffId).OnDelete(DeleteBehavior.Restrict);}
+ public void Configure(EntityTypeBuilder<WebsiteRevision>b){b.ToTable("WebsiteRevisions");b.HasKey(x=>x.Id);b.Property(x=>x.DocumentJson).HasColumnType("jsonb");b.Property(x=>x.Action).HasMaxLength(30);b.HasIndex(x=>new{x.RecordId,x.Version}).IsUnique();b.HasOne<WebsiteRecord>().WithMany().HasForeignKey(x=>x.RecordId).OnDelete(DeleteBehavior.Restrict);}
+ public void Configure(EntityTypeBuilder<WebsiteSlug>b){b.ToTable("WebsiteSlugs");b.HasKey(x=>new{x.Kind,x.Language,x.Slug});b.Property(x=>x.Kind).HasMaxLength(30);b.Property(x=>x.Language).HasMaxLength(2);b.Property(x=>x.Slug).HasMaxLength(180);b.HasOne<WebsiteRecord>().WithMany().HasForeignKey(x=>x.RecordId).OnDelete(DeleteBehavior.Restrict);}
+ public void Configure(EntityTypeBuilder<WebsiteAsset>b){b.ToTable("WebsiteAssets");b.HasKey(x=>x.Id);b.Property(x=>x.ContentType).HasMaxLength(30);b.Property(x=>x.OriginalName).HasMaxLength(200);}
+ public void Configure(EntityTypeBuilder<PublishingEvent>b){b.ToTable("PublishingEvents");b.HasKey(x=>x.Id);b.Property(x=>x.PayloadJson).HasColumnType("jsonb");b.HasIndex(x=>new{x.AcknowledgedAtUtc,x.CreatedAtUtc});}
+ public void Configure(EntityTypeBuilder<BlogRevisionAuthor>b){b.ToTable("BlogRevisionAuthors");b.HasKey(x=>new{x.RevisionId,x.AuthorId});b.HasOne<BlogRevision>().WithMany().HasForeignKey(x=>x.RevisionId).OnDelete(DeleteBehavior.Restrict);b.HasOne<WebsiteRecord>().WithMany().HasForeignKey(x=>x.AuthorId).OnDelete(DeleteBehavior.Restrict);}
+ public void Configure(EntityTypeBuilder<BlogEmbedding>b){b.ToTable("BlogEmbeddings");b.HasKey(x=>x.TranslationId);b.Property(x=>x.TranslationId).ValueGeneratedNever();b.Property(x=>x.Model).HasMaxLength(100);b.Property(x=>x.EmbeddingData).HasColumnType("text");b.HasOne<BlogPostTranslation>().WithOne().HasForeignKey<BlogEmbedding>(x=>x.TranslationId).OnDelete(DeleteBehavior.Restrict);b.HasOne<BlogRevision>().WithMany().HasForeignKey(x=>x.RevisionId).OnDelete(DeleteBehavior.Restrict);}
+}

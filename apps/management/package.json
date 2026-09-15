@@ -10,7 +10,8 @@
     "test:e2e": "playwright test",
     "preview": "vite preview --host localhost",
     "setup:https": "node scripts/dev-cert.mjs",
-    "format": "prettier --write src e2e *.ts *.json scripts/dev-cert.mjs"
+    "format": "prettier --write src e2e *.ts *.json scripts/dev-cert.mjs",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

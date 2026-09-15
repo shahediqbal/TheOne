@@ -1,3 +1,4 @@
+using TheOne.Application.Membership;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using TheOne.Application.Authentication.Interfaces;
@@ -20,6 +21,9 @@ public static class DependencyInjection
         services.AddScoped<IAdministratorRoleService, AdministratorRoleService>();
         services.AddScoped<TheOne.Application.UserManagement.IUserManagementService, TheOne.Application.UserManagement.UserManagementService>();
         services.AddScoped<TheOne.Application.Administration.IAdministrationService, TheOne.Application.Administration.AdministrationService>();
+        services.AddScoped<IMembershipApplicationService, MembershipApplicationService>();
+        services.AddScoped<IMembershipAdministrationService, MembershipAdministrationService>();
+        services.AddSingleton(new MembershipSubmissionPolicy());
         return services;
     }
 }

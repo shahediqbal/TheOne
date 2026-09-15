@@ -1,23 +1,34 @@
-<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
-<rect width="1000" height="300" fill="#fafafa"/>
-<text x="500" y="30" text-anchor="middle" font-size="20" font-weight="bold">Membership Registration Workflow</text>
-<g font-size="11">
-<!-- 7 steps -->
-<rect x="10" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="70" y="140" text-anchor="middle">Online Registration</text>
-<rect x="150" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="210" y="140" text-anchor="middle">Payment Request</text>
-<rect x="290" y="110" width="120" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="350" y="140" text-anchor="middle">bKash MFS Payment</text>
-<rect x="430" y="110" width="120" height="55" rx="6" fill="#bee3f8" stroke="#2b6cb0"/><text x="490" y="133" text-anchor="middle">Webhook</text><text x="490" y="148" text-anchor="middle">Verification</text>
-<rect x="570" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="630" y="140" text-anchor="middle">Transaction Update</text>
-<rect x="710" y="110" width="120" height="55" rx="6" fill="#edf2f7" stroke="#4a5568"/><text x="770" y="133" text-anchor="middle">Admin Approval</text><text x="770" y="148" text-anchor="middle">Workflow</text>
-<rect x="850" y="110" width="130" height="55" rx="6" fill="#2b6cb0"/><text x="915" y="133" text-anchor="middle" fill="white">Membership</text><text x="915" y="148" text-anchor="middle" fill="white">Activation</text>
-
-<line x1="130" y1="137" x2="150" y2="137" stroke="#555" marker-end="url(#arrow)"/>
-<line x1="270" y1="137" x2="290" y2="137" stroke="#555" marker-end="url(#arrow)"/>
-<line x1="410" y1="137" x2="430" y2="137" stroke="#555" marker-end="url(#arrow)"/>
-<line x1="550" y1="137" x2="570" y2="137" stroke="#555" marker-end="url(#arrow)"/>
-<line x1="690" y1="137" x2="710" y2="137" stroke="#555" marker-end="url(#arrow)"/>
-<line x1="830" y1="137" x2="850" y2="137" stroke="#555" marker-end="url(#arrow)"/>
+<svg viewBox="0 0 1040 610" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" role="img" aria-labelledby="title desc">
+<title id="title">Membership registration and manual fee review</title>
+<desc id="desc">Applicants save a draft and submit without payment. Staff verify the submitted application. Approval requires a recorded membership fee of at least BDT 100. Approval activates the member. Staff can reject submitted or verified applications with a reason. Donations and monthly dues do not satisfy the approval fee requirement.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker></defs>
+<rect width="1040" height="610" fill="#f8fafc"/>
+<text x="520" y="36" text-anchor="middle" font-size="23" font-weight="bold" fill="#0f172a">Membership registration and manual fee review</text>
+<text x="520" y="62" text-anchor="middle" font-size="14" fill="#475569">Application states and the member record have separate lifecycles.</text>
+<g font-size="16" text-anchor="middle" fill="#0f172a">
+<rect x="40" y="110" width="240" height="85" rx="10" fill="#e2e8f0" stroke="#64748b"/>
+<text x="160" y="142" font-weight="bold">Draft</text><text x="160" y="166" font-size="14">Save / resume with private token</text>
+<rect x="380" y="110" width="270" height="85" rx="10" fill="#dbeafe" stroke="#2563eb"/>
+<text x="515" y="142" font-weight="bold">Submitted</text><text x="515" y="166" font-size="14">Member: PendingApproval</text>
+<rect x="380" y="265" width="270" height="80" rx="10" fill="#dbeafe" stroke="#2563eb"/>
+<text x="515" y="296" font-weight="bold">Verified</text><text x="515" y="320" font-size="14">Staff checked the application</text>
+<rect x="380" y="435" width="270" height="85" rx="10" fill="#166534"/>
+<text x="515" y="467" font-weight="bold" fill="white">Approved</text><text x="515" y="491" font-size="14" fill="white">Member: Active; number assigned</text>
+<rect x="755" y="265" width="245" height="80" rx="10" fill="#fee2e2" stroke="#b91c1c"/>
+<text x="877" y="296" font-weight="bold">Rejected</text><text x="877" y="320" font-size="14">Staff decision with saved reason</text>
+<rect x="40" y="360" width="265" height="125" rx="10" fill="#fef3c7" stroke="#b45309"/>
+<text x="172" y="389" font-weight="bold">Manual fee record</text><text x="172" y="415" font-size="14">Staff records cash or bKash</text><text x="172" y="439" font-size="14">MembershipFee ≥ BDT 100</text><text x="172" y="463" font-size="13">Separate from form submission</text>
 </g>
-<text x="500" y="220" text-anchor="middle" font-size="12" fill="#333">Failure paths: expired payment -&gt; cancel application &amp; notify user; duplicate webhook -&gt; rejected via idempotency key.</text>
+<g stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)">
+<path d="M280 153 H375"/><path d="M515 195 V260"/><path d="M515 345 V430"/>
+<path d="M650 153 H877 V260"/><path d="M650 305 H750"/>
+<path d="M305 422 H350 V393 H505" stroke-dasharray="6 4"/>
+</g>
+<g font-size="13" fill="#334155">
+<text x="293" y="129">Submit</text><text x="535" y="230">Verify</text>
+<text x="535" y="384">Approve after fee check</text>
+<text x="728" y="135">Reject</text><text x="681" y="292">Reject</text>
+</g>
+<text x="520" y="560" text-anchor="middle" font-size="14" fill="#334155">Submission validates required fields, photo and consents; it does not require a payment.</text>
+<text x="520" y="585" text-anchor="middle" font-size="14" fill="#334155">Donations and monthly dues are separate records and do not satisfy the membership fee check.</text>
 </svg>

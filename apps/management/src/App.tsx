@@ -22,6 +22,9 @@ import ShieldIcon from "@mui/icons-material/ShieldOutlined";
 import { useAuth } from "./auth";
 import Login from "./Login";
 import { Heading, ErrorBox, Loading } from "./ui";
+const Website = lazy(() => import("./pages/Website"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Membership = lazy(() => import("./pages/Membership"));
 const Users = lazy(() => import("./pages/Users"));
 const Roles = lazy(() => import("./pages/Roles"));
 const Menus = lazy(() => import("./pages/Menus"));
@@ -29,6 +32,9 @@ const Audit = lazy(() => import("./pages/Audit"));
 const Security = lazy(() => import("./pages/Security"));
 import type { Nav } from "./types";
 const known = new Set([
+  "/website",
+  "/blog",
+  "/membership",
   "/administration/users",
   "/administration/roles",
   "/administration/menus",
@@ -391,6 +397,16 @@ export default function App() {
                     </Paper>
                   </>
                 }
+              />
+              <Route path="/website" element={guard("website.read", <Website />)} />
+              <Route path="/blog" element={guard("blog.read", <Blog />)} />
+              <Route
+                path="/membership"
+                element={guard("membership.read", <Membership />)}
+              />
+              <Route
+                path="/membership/:reference"
+                element={guard("membership.read", <Membership />)}
               />
               <Route path="/account/security" element={<Security />} />
               <Route

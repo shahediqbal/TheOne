@@ -4,15 +4,26 @@ namespace TheOne.Application.Administration;
 public static class Permissions
 {
     /// <summary>Read account details.</summary>
+    public const string WebsiteRead = "website.read";
+    public const string WebsiteEdit = "website.edit";
+    public const string WebsiteApprove = "website.approve";
+    public const string BlogRead = "blog.read";
+    public const string BlogEdit = "blog.edit";
+    public const string BlogApprove = "blog.approve";
     public const string UsersRead = "users.read";
     /// <summary>Change eligible account status.</summary>
     public const string UsersManage = "users.manage";
     /// <summary>Read security history.</summary>
     public const string AuditRead = "audit.read";
     /// <summary>Permission claim type.</summary>
+    public const string MembershipRead = "membership.read";
+    public const string MembershipEnter = "membership.enter";
+    public const string MembershipReview = "membership.review";
+    public const string MembershipApprove = "membership.approve";
+    public const string MembershipContribute = "membership.contribute";
     public const string ClaimType = "permission";
     /// <summary>Delegable administrative permissions; role and menu configuration remain SuperAdmin-only.</summary>
-    public static readonly IReadOnlyCollection<string> All = Array.AsReadOnly(new[] { UsersRead, UsersManage, AuditRead });
+    public static readonly IReadOnlyCollection<string> All = Array.AsReadOnly(new[] { WebsiteRead, WebsiteEdit, WebsiteApprove, BlogRead, BlogEdit, BlogApprove, UsersRead, UsersManage, AuditRead, MembershipRead, MembershipEnter, MembershipReview, MembershipApprove, MembershipContribute });
 }
 
 /// <summary>Role name and complete permission selection.</summary>
