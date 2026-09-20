@@ -1,10 +1,14 @@
 import { notFound } from "next/navigation";
 import { blogApi, type PublicBlog } from "../../../components/blog-api";
 export const dynamic = "force-dynamic";
-export const metadata = {
-  title: "Sadria Society | Reading & reflection",
-  description: "Articles on knowledge, self-reflection and humanity.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return {
+    title: lang === "bn" ? "পাঠ ও ভাবনা | সাদরিয়া সোসাইটি" : "Reading & reflection | Sadria Society",
+    description:
+      lang === "bn" ? "জ্ঞান, আত্মদর্শন ও মানবতার পথে।" : "On knowledge, self-reflection and humanity.",
+  };
+}
 export default async function Page({
   params,
   searchParams,
@@ -19,15 +23,7 @@ export default async function Page({
   if (!Number.isInteger(page) || page < 1 || page > 10000) notFound();
   const posts = (await blogApi<PublicBlog[]>(`${lang}?page=${page}`)) || [];
   return (
-    <main className="blog-shell">
-      <header className="blog-header">
-        <a href={`/${lang}/blog`}>
-          {lang === "bn" ? "সাদরিয়া সোসাইটি" : "Sadria Society"}
-        </a>
-        <a href={`/${lang === "bn" ? "en" : "bn"}/blog`}>
-          {lang === "bn" ? "English" : "বাংলা"}
-        </a>
-      </header>
+    <div className="blog-shell">
       <h1>{lang === "bn" ? "পাঠ ও ভাবনা" : "Reading & reflection"}</h1>
       <p className="blog-summary">
         {lang === "bn"
@@ -66,6 +62,6 @@ export default async function Page({
           </a>
         )}
       </nav>
-    </main>
+    </div>
   );
 }

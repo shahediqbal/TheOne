@@ -3,6 +3,12 @@ import path from "node:path";
 const config: NextConfig = {
   poweredByHeader: false,
   turbopack: { root: path.resolve(process.cwd(), "../..") },
+  async redirects() {
+    // Replaces the old root app/page.tsx redirect — no page needs to exist outside the [lang]
+    // tree now, which is what lets [lang]/layout.tsx be the true root and set <html lang>
+    // correctly during server rendering (see that file's comment for why this matters).
+    return [{ source: "/", destination: "/bn", permanent: false }];
+  },
   async headers() {
     return [
       {

@@ -291,7 +291,7 @@ export default function MembershipForm({ language }: { language: Language }) {
           {lang === "bn" ? "English" : "বাংলা"}
         </button>
       </header>
-      <main className="max-w-6xl mx-auto px-5 pb-16">
+      <div className="max-w-6xl mx-auto px-5 pb-16">
         <div className="py-7">
           <p className="text-sm uppercase tracking-widest">
             {t("সদস্যপদ", "Membership")}
@@ -843,7 +843,7 @@ export default function MembershipForm({ language }: { language: Language }) {
             </div>
           )}
         </fieldset>
-      </main>
+      </div>
     </>
   );
 }

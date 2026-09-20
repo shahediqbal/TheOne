@@ -32,7 +32,7 @@ export default function BlogPreview({ language }: { language: string }) {
       .catch((e) => setError(e.message));
   }, []);
   return (
-    <main className="blog-shell">
+    <div className="blog-shell">
       <p className="notice">
         {language === "bn"
           ? "ব্যক্তিগত প্রিভিউ — প্রকাশিত নয়"
@@ -48,6 +48,6 @@ export default function BlogPreview({ language }: { language: string }) {
       ) : (
         !error && <p>Loading…</p>
       )}
-    </main>
+    </div>
   );
 }

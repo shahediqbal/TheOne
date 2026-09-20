@@ -23,7 +23,7 @@ export default function BlogArticle({
     mainEntityOfPage: canonical,
   };
   return (
-    <main className="blog-shell">
+    <div className="blog-shell">
       <header className="blog-header">
         <a href={`/${requestedLanguage}/blog`}>
           {requestedLanguage === "bn"
@@ -63,6 +63,6 @@ export default function BlogArticle({
           __html: JSON.stringify(structured).replace(/</g, "\\u003c"),
         }}
       />
-    </main>
+    </div>
   );
 }
