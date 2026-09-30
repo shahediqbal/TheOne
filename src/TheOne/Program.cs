@@ -1,3 +1,5 @@
+using TheOne.API.Hosting;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using TheOne.Application.Membership;
 using TheOne.Infrastructure.Translation;
 using System.Threading.RateLimiting;
@@ -105,7 +107,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.AddPortableHosting();
 var app = builder.Build();
+app.UseForwardedHeaders();
+// Container health checks are internal and do not require HTTPS or database writes.
+app.UseHealthChecks("/health", new HealthCheckOptions { Predicate = _ => false });
+app.UseHealthChecks("/health/ready", new HealthCheckOptions { Predicate = check => check.Tags.Contains("ready") });
 app.UseMiddleware<SecurityRequestAuditMiddleware>();
 app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())

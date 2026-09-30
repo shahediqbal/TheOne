@@ -1,0 +1,20 @@
+# Repository-root build context. Local credentials and development artifacts never enter images.
+.git
+**/node_modules
+**/.next
+**/dist
+**/bin
+**/obj
+**/.certs
+**/.env*
+**/appsettings.*.json
+**/secrets.json
+**/*.pfx
+**/*.p12
+**/*.pem
+**/*.key
+**/TestResults
+**/logs
+**/*.log
+artifacts
+.vs

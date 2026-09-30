@@ -87,3 +87,16 @@ it("preserves unsaved content after a conflicting save", async () => {
   await screen.findByText("Content changed. Reload.");
   expect((title as HTMLInputElement).value).toBe("My revision");
 });
+
+it("loads starter text into the draft without sending a save or publish request", async () => {
+  status = 0;
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  render(<Website />);
+  fireEvent.click(await screen.findByRole("button", { name: /About us · en/ }));
+  fireEvent.mouseDown(await screen.findByLabelText("Use existing-site starter text / পুরোনো সাইটের প্রাথমিক লেখা"));
+  fireEvent.click(await screen.findByRole("option", {name: "Mawla’s life / মাওলার জীবন"}));
+  expect((screen.getByLabelText("Title") as HTMLInputElement).value).toBe("Mawla Sadar Uddin Ahmad Chisty");
+  expect((screen.getByLabelText("Slug") as HTMLInputElement).value).toBe("life");
+  expect(vi.mocked(api).mock.calls.filter(([,method]) => method === "PUT" || method === "POST")).toHaveLength(0);
+  vi.restoreAllMocks();
+});

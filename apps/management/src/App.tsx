@@ -1,3 +1,4 @@
+import { portalUrl } from "../../../packages/website/portal";
 import { useState, lazy, Suspense } from "react";
 import { Routes, Route, NavLink, Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -253,6 +254,9 @@ export default function App() {
             }
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
+          </Button>
+          <Button component="a" href={`${portalUrl(import.meta.env.VITE_WEBSITE_PUBLIC_ORIGIN, import.meta.env.DEV ? "http://localhost:3000" : "/").replace(/\/$/, "")}/${i18n.language === "en" ? "en" : "bn"}`}>
+            {i18n.language === "en" ? "View website ↗" : "ওয়েবসাইট দেখুন ↗"}
           </Button>
           <Avatar
             sx={{

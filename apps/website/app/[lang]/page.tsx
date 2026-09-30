@@ -3,6 +3,7 @@ import { getSiteSettings, resolveFixedSlugPage, assetUrl } from "../../lib/websi
 import { pageMetadata } from "../../lib/seo";
 import { MissingTranslationBanner } from "../../components/site/MissingTranslationBanner";
 import { blogApi, type PublicBlog } from "../../components/blog-api";
+import { introduction } from "../../../../packages/website/starter-content";
 import BlogBlocks from "../../components/BlogBlocks";
 
 export function generateStaticParams() {
@@ -61,6 +62,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
   const hero = homePage?.document.content ?? null;
   const heroImage = assetUrl(settings?.document.fields.heroAssetId);
+  const text = introduction[language];
 
   return (
     <>
@@ -68,25 +70,34 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <MissingTranslationBanner requestedLanguage={language} fallbackHref={`/${homePage.language}`} />
       )}
 
-      <section
-        className="home-hero"
-        style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
-      >
-        <div className="home-hero-content">
-          <h1>{hero?.title ?? heroFallback[language].title}</h1>
-          <p>{hero?.summary ?? heroFallback[language].summary}</p>
+      <section className="editorial-hero">
+        <div className="editorial-intro">
+          <p className="eyebrow">{language === "en" ? "LIFE · TEACHINGS · COMMUNITY" : "জীবন · শিক্ষা · সমাজ"}</p>
+          <h1>{hero?.title ?? text.title}</h1>
+          <p className="editorial-summary">{hero?.summary ?? text.summary}</p>
+          <a className="editorial-link" href={`/${language}/life`}>{language === "en" ? "Discover Mawla’s life" : "মাওলার জীবন জানুন"} <span aria-hidden="true">↗</span></a>
         </div>
+        <figure className="editorial-portrait">
+          <img src={heroImage || "/images/mawla-portrait.jpg"} alt={heroImage ? (hero?.title ?? text.title) : text.name} fetchPriority="high" />
+          <figcaption>{heroImage ? (language === "en" ? "Sadria Society" : "সাদরিয়া সোসাইটি") : text.name}</figcaption>
+        </figure>
       </section>
 
       <div className="home-entries">
-        {entries[language].map((entry) => (
+        {entries[language].map((entry, index) => (
           <a key={entry.href} href={entry.href} className={`home-entry${entry.primary ? " primary" : ""}`}>
-            <h3>{entry.title}</h3>
+            <span className="entry-number" aria-hidden="true">0{index + 1} /</span>
+            <h3>{entry.title} <span aria-hidden="true">↗</span></h3>
             <p>{entry.body}</p>
           </a>
         ))}
       </div>
 
+      <section className="heritage-section home-section">
+        <div><p className="eyebrow">{language === "en" ? "OUR HERITAGE" : "আমাদের ঐতিহ্য"}</p><h2>{text.name}</h2><p className="heritage-dates">{language === "en" ? "1914 — 2006" : "১৯১৪ — ২০০৬"}</p></div>
+        <div><p>{text.biography}</p><a className="text-link" href={`/${language}/life`}>{language === "en" ? "Life & teachings" : "জীবন ও শিক্ষা"} →</a></div>
+      </section>
+      <section className="community-band home-section"><div><p className="eyebrow">{language === "en" ? "STAY CONNECTED" : "সংযুক্ত থাকুন"}</p><h2>{language === "en" ? "Discover the community" : "আমাদের সমাজের সঙ্গে পরিচিত হোন"}</h2><p>{language === "en" ? "Explore our organizations, programmes and membership." : "আমাদের প্রতিষ্ঠান, অনুষ্ঠান ও সদস্যপদ সম্পর্কে জানুন।"}</p></div><a className="editorial-link" href={`/${language}/membership`}>{language === "en" ? "Membership" : "সদস্যপদ"} ↗</a></section>
       {hero?.blocks?.length ? (
         <section className="home-section">
           <h2>{language === "en" ? "Selected teachings" : "নির্বাচিত শিক্ষা"}</h2>

@@ -1,6 +1,8 @@
 import type { Language, MenuItem } from "../../lib/website-api";
 import { getPublicMenu, buildMenuTree } from "../../lib/website-api";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { ResponsiveNav } from "./ResponsiveNav";
+import { portalUrl } from "../../../../packages/website/portal";
 import { NavItem } from "./NavItem";
 
 /**
@@ -44,17 +46,19 @@ export async function Header({ language }: { language: Language }) {
   }
   const tree = buildMenuTree(items);
 
+  const staffUrl = portalUrl(process.env.MANAGEMENT_PUBLIC_ORIGIN, process.env.NODE_ENV === "development" ? "https://localhost:5173" : "/staff");
   return (
     <header className="site-header">
       <a href={`/${language}`} className="site-wordmark">
         {wordmark[language]}
       </a>
-      <nav className="site-nav" aria-label="Main">
+      <ResponsiveNav language={language}>
         {tree.map((item) => (
           <NavItem key={item.key} item={item} depth={0} />
         ))}
-      </nav>
-      <LanguageSwitcher current={language} />
+      </ResponsiveNav>
+      <div className="header-tools"><LanguageSwitcher current={language} />
+      <a className="staff-login" href={staffUrl}>{language === "en" ? "Staff login" : "স্টাফ লগইন"} <span aria-hidden="true">↗</span></a></div>
     </header>
   );
 }

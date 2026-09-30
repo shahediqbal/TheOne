@@ -1,3 +1,4 @@
+import { starterPage } from "../../../../packages/website/starter-content";
 import { useEffect, useRef, useState } from "react";
 import {
   Alert,
@@ -603,6 +604,19 @@ export default function Website() {
                 sx={{ border: 0, p: 0, m: 0, minWidth: 0 }}
               >
                 <Stack spacing={2}>
+                  {selected.kind === "Page" && selected.status === 0 && (selected.language === "bn" || selected.language === "en") && (
+                    <TextField select value="" label="Use existing-site starter text / পুরোনো সাইটের প্রাথমিক লেখা"
+                      helperText="Loads a draft only. Review, save and follow the normal approval process."
+                      onChange={event => {
+                        const slug = event.target.value;
+                        if (slug !== "home" && slug !== "life") return;
+                        if ((doc.content.title || doc.content.blocks.length) && !window.confirm("Replace this draft’s text? / এই খসড়ার লেখা প্রতিস্থাপন করবেন?")) return;
+                        change({...doc, content: starterPage(selected.language as "bn" | "en", slug)});
+                      }}>
+                      <MenuItem value="home">Home / প্রথম পাতা</MenuItem>
+                      <MenuItem value="life">Mawla’s life / মাওলার জীবন</MenuItem>
+                    </TextField>
+                  )}
                   {(
                     [
                       "title",

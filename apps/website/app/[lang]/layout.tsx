@@ -36,8 +36,9 @@ export default async function LangLayout({
   return (
     <html lang={language} data-lang={language}>
       <body>
+        <a className="skip-link" href="#main-content">{language === "en" ? "Skip to content" : "মূল বিষয়বস্তুতে যান"}</a>
         <Header language={language} />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer language={language} />
       </body>
     </html>

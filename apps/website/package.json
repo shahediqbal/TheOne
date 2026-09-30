@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.3.0",
   "scripts": {
-    "dev": "next dev --hostname localhost --port 3000",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "next start --hostname localhost --port 3000",
     "test": "vitest run"
