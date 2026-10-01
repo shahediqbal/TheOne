@@ -1,5 +1,5 @@
 # Configure values in Coolify; never commit a populated environment file.
-# This Compose application owns a separate staging key volume.
+# Reuse the existing staging Data Protection keys; Compose does not own this volume.
 services:
   api:
     build:
@@ -30,7 +30,9 @@ services:
           - theone-staging-api
 
 volumes:
-  data-protection-keys: {}
+  data-protection-keys:
+    external: true
+    name: pcliiwn3ayhlvmtqpax96hgy-theone-staging-data-protection-keys
 
 networks:
   coolify:
