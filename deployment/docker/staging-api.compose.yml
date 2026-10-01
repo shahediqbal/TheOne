@@ -1,0 +1,41 @@
+# Configure values in Coolify; never commit a populated environment file.
+# This Compose application owns a separate staging key volume.
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/api.Dockerfile
+    expose:
+      - "8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Staging}
+      ASPNETCORE_HTTP_PORTS: ${ASPNETCORE_HTTP_PORTS:-8080}
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection:?}
+      Jwt__Issuer: ${Jwt__Issuer:?}
+      Jwt__Audience: ${Jwt__Audience:?}
+      Jwt__SecretKey: ${Jwt__SecretKey:?}
+      AllowedHosts: ${AllowedHosts:?}
+      Browser__AllowedOrigins__0: ${Browser__AllowedOrigins__0:?}
+      DataProtection__KeysPath: ${DataProtection__KeysPath:-/app/data-protection-keys}
+      ReverseProxy__Enabled: ${ReverseProxy__Enabled:-true}
+      ReverseProxy__ForwardLimit: ${ReverseProxy__ForwardLimit:-1}
+      ReverseProxy__KnownNetworks__0: ${ReverseProxy__KnownNetworks__0:?}
+      SmsProvider__Enabled: ${SmsProvider__Enabled:-false}
+    volumes:
+      - data-protection-keys:/app/data-protection-keys
+    networks:
+      coolify: {}
+      theone-staging-proxy:
+        aliases:
+          - theone-staging-api
+
+volumes:
+  data-protection-keys: {}
+
+networks:
+  coolify:
+    external: true
+    name: coolify
+  theone-staging-proxy:
+    external: true
+    name: theone-staging-proxy
