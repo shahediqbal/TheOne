@@ -1,26 +1,54 @@
-# API_UPSTREAM is a trusted operator value such as http://api:8080 (no trailing slash).
+# API_UPSTREAM is a trusted operator value such as http://theone-api-staging:8080 (no trailing slash).
 # Expose this service only behind the HTTPS edge, not directly on a public HTTP port.
+
 server {
     listen 80;
     server_name _;
+
     root /usr/share/nginx/html;
     client_max_body_size 20m;
+
     add_header X-Content-Type-Options nosniff always;
     add_header X-Frame-Options DENY always;
-    location = /health { access_log off; return 200 'OK'; add_header Cache-Control no-store; }
-    location = /api { return 404; }
+
+    resolver 127.0.0.11 valid=10s ipv6=off;
+
+    set $api_upstream "${API_UPSTREAM}";
+
+    location = /health {
+        access_log off;
+        return 200 'OK';
+        add_header Cache-Control no-store;
+    }
+
+    location = /api {
+        return 404;
+    }
+
     location /api/ {
-        proxy_pass ${API_UPSTREAM};
+        proxy_pass $api_upstream;
+
         proxy_http_version 1.1;
+
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Proto https;
         proxy_set_header X-TheOne-Client web;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
         proxy_cache off;
         proxy_hide_header Cache-Control;
         add_header Cache-Control "no-store" always;
     }
-    location /assets/ { try_files $uri =404; expires 1y; add_header Cache-Control "public, immutable"; }
-    location / { try_files $uri $uri/ /index.html; add_header Cache-Control "no-cache"; }
+
+    location /assets/ {
+        try_files $uri =404;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache";
+    }
 }
